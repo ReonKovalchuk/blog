@@ -1,0 +1,23 @@
+html {
+    background-color: #f1efe3;
+}
+
+.footer {
+    background-color: inherit;
+}
+
+.article-link:hover {
+    color: #485fc7;
+    text-decoration: underline;
+}
+
+.post {
+    align-items: unset;
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0 0 0;
+}
