@@ -1,4 +1,4 @@
-import { getPostByID, getComments, getUserByID } from "./post-get.js";
+import { getPostByID, getComments } from "./post-get.js";
 
 export const createPostPage = async () => {
     const postContainer = document.querySelector('.post-container');
