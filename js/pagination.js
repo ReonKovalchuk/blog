@@ -53,7 +53,7 @@ const getListItem = (index, current) => {
 
     let listItem = document.createElement('li');
     let pageLink = document.createElement('a');
-    pageLink.setAttribute('href', `main.html?page=${index}`);
+    pageLink.setAttribute('href', `index.html?page=${index}`);
     pageLink.setAttribute('aria-label', `Goto page ${index}`);
     pageLink.innerText = index;
     pageLink.classList.add('pagination-link')
