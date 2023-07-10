@@ -1,4 +1,4 @@
-import { getPostByID, getComments } from "./post-get.js";
+import { getPostByID, getComments, postComment } from "./post-get.js";
 
 export const createPostPage = async () => {
     const postContainer = document.querySelector('.post-container');
@@ -34,7 +34,7 @@ const getPostBody = async (n) => {
                         <small>
                             <a>Like</a> · <a href="#reply">Reply</a> · <a href="#comments"> ${n === 0 ? 0 : n} ${n === 1 ? 'comment' : 'comments'}</a>
                         </small>
-                        
+
                     </div>`
 }
 {/* <nav class="level is-mobile">
@@ -47,10 +47,13 @@ const getPostBody = async (n) => {
 
 const createCommentsSection = async (comments) => {
     const commentsContainer = document.querySelector('.comments-container');
+    commentsContainer.innerHTML = '';
     comments.forEach(comment => {
         commentsContainer.append(getCommentBody(comment));
     });
     commentsContainer.append(createReplyForm());
+    const postBtn = document.querySelector('.post-btn');
+    postBtn.addEventListener('click', submitComment)
 }
 
 const getCommentBody = (comment) => {
@@ -69,7 +72,7 @@ const getCommentBody = (comment) => {
                     <br>
                         ${comment.body}
                         <br>
-                            <small><a>Like</a> · <a href="#reply">Reply</a></small>
+                            <small><a>Like</a></small>
                         </p>
                     </div>
             </div>`
@@ -89,15 +92,26 @@ const createReplyForm = () => {
         <div class="media-content">
             <div class="field">
                 <p class="control">
-                    <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                    <textarea class="textarea comment-text" placeholder="Add a comment..."></textarea>
                 </p>
             </div>
             <div class="field">
                 <p class="control">
-                    <button class="button">Post comment</button>
+                    <button class="button post-btn">Post comment</button>
                 </p>
             </div>
-        </div>`
+        </div>`;
+
 
     return article;
+}
+
+const submitComment = async () => {
+    const commentBody = document.querySelector('.comment-text').value;
+    if (commentBody) {
+        await postComment(commentBody);
+        await createPostPage();
+    }
+
+
 }

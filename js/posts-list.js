@@ -17,7 +17,7 @@ const createPost = async (post) => {
     postElem.innerHTML = `
     
     <article class="media post">
-        <figure class="media-left has-text-centered">
+        <figure class="media-left has-text-centered cen">
             <p class="image is-128x128 ">
                 <img src="img/userpic 280.jpeg">
             </p>
