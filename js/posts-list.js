@@ -1,4 +1,5 @@
 import { getComments, getPostsData } from "./post-get.js";
+import { getPostFooter } from "./post-details.js";
 
 
 export const createPosts = async () => {
@@ -16,23 +17,25 @@ const createPost = async (post) => {
     postElem.classList.add('box');
     postElem.innerHTML = `
     
-    <article class="media post">
-        <figure class="media-left has-text-centered cen">
-            <p class="image is-128x128 ">
-                <img src="img/userpic 280.jpeg">
-            </p>
-            <p >
-                    <strong>ID</strong> <small>${post.user_id}</small>
-                </p>
-        </figure>
-        <div class="media-content post-content">
-            <div class="content">
-                <a href="post.html?id=${post.id}"><h2 class="title is-4 article-link">${post.title}</h2></a>
-                
-            </div>
-            <small><a>Like</a> · <a href="post.html?id=${post.id}#reply">Reply</a> · <a href="post.html?id=${post.id}#comments"> ${n} ${n === 1 ? 'comment' : 'comments'}</a></small>
-        </div>
-    </article>`
+                <article class="media post">
+                    <figure class="media-left is-hidden-mobile">
+                        <p class="image is-128x128 ">
+                            <img src="img/userpic 280.jpeg">
+                        </p>
+                        <p>
+                            <strong>ID</strong> <small>${post.user_id}</small>
+                        </p>
+                    </figure>
+                    <div class="media-content post-content">
+                        <div class="content">
+                            <a href="post.html?id=${post.id}">
+                                <h2 class="title is-4 article-link">${post.title}</h2>
+                            </a>
+
+                        </div>
+                        ${getPostFooter(post.id, n)}
+                    </div>
+                </article>`
 
     return postElem;
 

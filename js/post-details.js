@@ -15,27 +15,43 @@ export const createPostPage = async () => {
 
 const getPostBody = async (n) => {
     let post = await getPostByID();
-    return `<figure class="media-left">
-                        <p class="image is-128x128">
-                            <img src="img/userpic 280.jpeg">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <h1 class="title is-3 mb-1">${post.title}</h1>
-                            <p>
-                                <strong>ID</strong> <small>${post.user_id}</small>
-                            </p>
-                            <p>
-                                ${post.body}
-                            </p>
+    return `<figure class="media-left is-hidden-mobile">
+                <p class="image is-128x128">
+                    <img src="img/userpic 280.jpeg">
+                </p>
+            </figure>
+            <div class="media-content">
+                <div class="content">
+                    <h1 class="title is-3 mb-1">${post.title}</h1>
+                    <p>
+                        <strong>ID</strong> <small>${post.user_id}</small>
+                    </p>
+                    <p>
+                        ${post.body}
+                    </p>
+                </div>
+
+                ${getPostFooter(post.id, n)}
+            </div>`
+}
+
+export const getPostFooter = (id, n) => {
+    return `<small>
+                <nav class="level is-mobile">
+                    <div class="level-left">
+                        <div class="level-item">
+                            <a>Like</a>
                         </div>
 
-                        <small>
-                            <a>Like</a> · <a href="#reply">Reply</a> · <a href="#comments"> ${n === 0 ? 0 : n} ${n === 1 ? 'comment' : 'comments'}</a>
-                        </small>
-
-                    </div>`
+                        <div class="level-item">
+                            <a href="post.html?id=${id}#reply">Reply</a>
+                        </div>
+                        <div class="level-item">
+                            <a href="post.html?id=${id}#comments"> ${n} ${n === 1 ? 'comment' : 'comments'}</a>
+                        </div>
+                    </div>
+                </nav>
+            </small>`
 }
 {/* <nav class="level is-mobile">
                             <div class="level-left">
@@ -68,7 +84,7 @@ const getCommentBody = (comment) => {
         <div class="media-content">
             <div class="content">
                 <p>
-                    <strong>${comment.name}</strong> <small>${comment.email}</small>
+                    <strong>${comment.name}</strong>
                     <br>
                         ${comment.body}
                         <br>
